@@ -3,7 +3,7 @@ require('dotenv').config()
 //create express app
 const express = require('express');
 const app = express();
-
+// these are someedits
 const cors = require('cors');
 const CoursesRoutes = require('./routes/CoursesRouter');
 const mongoose = require('mongoose');
