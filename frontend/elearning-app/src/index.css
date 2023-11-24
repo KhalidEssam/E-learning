@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.left-column {
+  flex: 1;
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+  border: 10px solid rgb(71, 73, 72);
+  border-radius: 8px;
+  width: 60%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex; /* Use flex to arrange label and input side by side */
+  flex-direction: column; /* Stack label and input vertically */
+}
