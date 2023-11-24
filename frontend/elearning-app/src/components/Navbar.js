@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const Navbar = () => {
+
+    const items = { 'Home': '/', 'Contact': '/contact', 'About': '/about', 'Courses': '/courses' }; // Your list of items
+    const [hoveredItem, setHoveredItem] = useState(0);
+
     const navStyle = {
         backgroundColor: '#333',
-        color: '#fff',
+        // color: '#fff',
         padding: '1rem',
     };
 
@@ -15,29 +20,36 @@ const Navbar = () => {
     };
 
     const liStyle = {
-        padding: '0.5rem',
+        textDecoration: 'underline',
+        color: 'green',
     };
 
     const linkStyle = {
-        color: '#fff',
         textDecoration: 'none',
+        color: 'green',
+        fontSize: '25px',
+        fontWeight: 'bold'
     };
 
     return (
-        <nav style={navStyle}>
-            <ul style={ulStyle}>
-                <li style={liStyle}>
-                    <Link to="/" style={linkStyle}>Home</Link>
-                </li>
-                <li style={liStyle}>
-                    <Link to="/about" style={linkStyle}>About</Link>
-                </li>
-                <li style={liStyle}>
-                    <Link to="/services" style={linkStyle}>Services</Link>
-                </li>
-                <li style={liStyle}>
-                    <Link to="/courses" style={linkStyle}>Courses</Link>
-                </li>
+        <nav style={navStyle} >
+            <ul style={ulStyle} >
+                {Object.entries(items).map((item, index) => (
+                    <li
+                        key={item[0]}
+                        onMouseEnter={() => setHoveredItem(index)}
+                        onMouseLeave={() => setHoveredItem(null)}
+                        style={{
+                            ...liStyle,
+                            color: 'blue',
+                            padding: '8px',
+                            cursor: 'pointer',
+                            backgroundColor: hoveredItem === index ? 'lightgray' : 'transparent',
+                        }}
+                    >
+                        <Link to={item[1]} style={{ ...linkStyle, }} >{item[0]}</Link>
+                    </li>
+                ))}
             </ul>
         </nav>
     );
