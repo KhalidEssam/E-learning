@@ -13,12 +13,16 @@ code {
 }
 .left-column {
   flex: 1;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 20px;
   background-color: white;
   padding: 20px;
   text-align: center;
   border: 10px solid rgb(71, 73, 72);
   border-radius: 8px;
-  width: 60%;
+  max-width: 100%;
+  overflow: auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex; /* Use flex to arrange label and input side by side */
   flex-direction: column; /* Stack label and input vertically */
