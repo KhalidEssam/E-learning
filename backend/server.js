@@ -6,6 +6,7 @@ const app = express();
 // these are someedits
 const cors = require('cors');
 const CoursesRoutes = require('./routes/CoursesRouter');
+const UserRoutes = require('./routes/UserRouter');
 const mongoose = require('mongoose');
 
 //middlewares
@@ -23,7 +24,7 @@ app.use(cors());
 
 //routes
 app.use('/api/courses', CoursesRoutes);
-
+app.use('/api/users', UserRoutes);
 
 //connect to db
 mongoose.connect(process.env.MONG_URI)
