@@ -1,5 +1,4 @@
 const express = require("express");
-const CourseModel = require("../models/CoursesModel");
 const {
     getAllCourses,
     getCourse,
