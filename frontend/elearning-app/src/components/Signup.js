@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import styles from './styles';
 const SignupForm = () => {
     const [formData, setFormData] = useState({
         username: '',
@@ -56,30 +56,13 @@ const SignupForm = () => {
         }
     };
 
-    const inputStyle = {
-        width: '100%',
-        padding: '10px',
-        marginBottom: '20px',
-        border: '1px solid #ccc',
-        borderRadius: '4px',
-        fontSize: '16px',
-    };
 
-    const buttonStyle = {
-        backgroundColor: '#007bff',
-        color: '#fff',
-        border: 'none',
-        borderRadius: '4px',
-        padding: '12px 24px',
-        cursor: 'pointer',
-        fontSize: '16px',
-    };
 
     return (
-        <div style={{ width: '400px', margin: '50px auto', padding: '20px', backgroundColor: '#f9f9f9', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
+
+        <div style={styles.container}>
             <h2 style={{ textAlign: 'center' }}>Signup</h2>
-            <form onSubmit={handleSubmit} style={{ textAlign: 'left' }}>
-                <h3>Add a New User</h3>
+            <form onSubmit={handleSubmit} style={styles.form}>
                 <input
                     type="text"
                     id="username"
@@ -88,7 +71,7 @@ const SignupForm = () => {
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Username"
                     required
-                    style={inputStyle}
+                    style={styles.inputStyle}
                 />
                 <input
                     type="password"
@@ -98,7 +81,7 @@ const SignupForm = () => {
                     onChange={handleChange}
                     placeholder="Password"
                     required
-                    style={inputStyle}
+                    style={styles.inputStyle}
                 />
                 <input
                     type="password"
@@ -108,7 +91,7 @@ const SignupForm = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Confirm Password"
                     required
-                    style={inputStyle}
+                    style={styles.inputStyle}
                 />
                 <input
                     type="email"
@@ -118,7 +101,7 @@ const SignupForm = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
                     required
-                    style={inputStyle}
+                    style={styles.inputStyle}
                 />
                 <select
                     id="role"
@@ -126,16 +109,15 @@ const SignupForm = () => {
                     value={Role}
                     onChange={(e) => setRole(e.target.value)}
                     required
-                    style={inputStyle}
+                    style={styles.inputStyle}
                 >
                     <option value="admin">Admin</option>
                     <option value="teacher">Teacher</option>
                     <option value="student">Student</option>
                 </select>
-                <button type="submit" style={buttonStyle}>Sign Up</button>
+                <button type="submit" style={styles.buttonStyle}>Sign Up</button>
             </form>
         </div>
     );
 };
-
 export default SignupForm;

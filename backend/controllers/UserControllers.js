@@ -11,10 +11,20 @@ const getAllUsers = async (req, res) => {
     }
 };
 
-//get a single User
+//get a single User by email
 const getUser = async (req, res) => {
     try {
         const User = await UserSchema.findById(req.params.id);
+        res.status(200).json(User);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+//get a single User by email
+const getUserByEmail = async (req, res) => {
+    try {
+        const User = await UserSchema.findOne({ email: req.params.email });
         res.status(200).json(User);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -73,4 +83,5 @@ module.exports = {
     deleteUser,
     getAllUsers,
     getUser,
+    getUserByEmail,
 };
