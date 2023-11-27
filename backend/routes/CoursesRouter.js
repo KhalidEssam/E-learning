@@ -6,6 +6,8 @@ const {
     updateCourse,
     deleteCourse,
 } = require("../controllers/CoursesControler");
+
+const { sendEmail } = require('../controllers/MailController');
 const router = express.Router();
 
 // get all courses
@@ -16,6 +18,9 @@ router.get("/:id", getCourse);
 
 // create a course
 router.post("/", createCourse);
+
+// send email
+router.post("/email", sendEmail);
 
 // update a course
 router.put("/:id", updateCourse);
