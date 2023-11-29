@@ -21,12 +21,12 @@ function Courses() {
 
 
     return (
-        <div>
-            <h1 style={{textDecoration:'underline',}}>Courses</h1>
+        <div style={{overflow: 'hidden'}} >
+            <h1 style={{ textDecoration: 'underline', }}>Courses</h1>
 
 
             {Courses && Courses.map((course) => (
-                <CoursesDetails key={course._id} course={course} />
+                <CoursesDetails key={course._id} course={course} style={{ BackgroundColor: 'red', textDecoration: 'underline' }} />
             ))}
         </div>
     );

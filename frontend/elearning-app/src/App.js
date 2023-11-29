@@ -23,19 +23,23 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={{ BackgroundColor: 'red' }}>
 
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/courses' element={<Courses />} />
-          <Route path='/users' element={<Users />} />
-          <Route path='/Logout' element={<LogoutButton />} />
+        <div className='ParentContainer'>
 
-        </Routes>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/courses' element={<Courses />} />
+            <Route path='/users' element={<Users />} />
+            <Route path='/Logout' element={<LogoutButton />} />
+
+          </Routes>
+        </div>
       </BrowserRouter>
     </div>
+
   );
 }
 
