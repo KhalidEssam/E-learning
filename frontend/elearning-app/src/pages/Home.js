@@ -6,7 +6,7 @@ import SigninForm from '../components/Signin';
 
 function Home() {
     return (
-        <div className="home">
+        <div>
             <h1>Hello</h1>
             <SigninForm />
             <SignupForm />

@@ -1,7 +1,16 @@
 .App {
   text-align: center;
+ 
 }
+.ParentContainer{
 
+  display: block;
+  justify-content: center ;
+  align-items: center;
+  margin: auto;
+  max-width: 80%;
+
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
