@@ -18,7 +18,9 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true
-    }
+    },
+    isAdmin: { type: Boolean, default: false },
+    isUser: { type: Boolean, default: true },
     // You can add more fields as per your requirements (e.g., email, name, etc.)
 }, { timestamps: true });
 

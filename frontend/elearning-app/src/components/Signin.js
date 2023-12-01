@@ -9,7 +9,7 @@ const SignInComponent = () => {
     const dispatch = useDispatch();
     // todo cheack the user state
     const user = useSelector((state) => state.user?.user);
-
+    // console.log(user);
     const { loginWithRedirect } = useAuth0();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -82,8 +82,8 @@ const SignInComponent = () => {
                 />
                 {/* handleSignIn(); loginWithRedirect(); */}
                 <button onClick={() => {
-                    dispatch(userLogin(User)); console.log(User);
-                    user?.isAdmin === true ? loginWithRedirect({ returnTo: 'http://localhost:3000/courses' }) : console.log("Not Admin")
+                    dispatch(userLogin(User));
+                    user?.isAdmin === true ? loginWithRedirect({ returnTo: 'http://localhost:3000/course/' }, console.log("welcome admin"),) : console.log(user, "Not Admin")
                 }} type="submit" style={styles.buttonStyle}>Sign In</button>            </form>
         </div>
     );
