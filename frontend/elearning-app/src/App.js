@@ -34,8 +34,8 @@ function App() {
 
             <Routes>
               <Route path='/' element={<Home />} />
-              <Route path='/courses' element={<Courses />} />
-              <Route path='/users' element={<Users />} />
+              <Route path='/course' element={<Courses />} />
+              <Route path='/user' element={<Users />} />
               <Route path='/Logout' element={<LogoutButton />} />
 
             </Routes>

@@ -31,9 +31,9 @@ app.use(cors());
 
 //routes
 app.use('/api/courses', CoursesRoutes);
-app.use('/api/users', UserRoutes);
+app.use('/api/user', UserRoutes);
 
 
 app.listen(process.env.PORT, (err) =>
-err ? console.log(err) : console.log(` server is running on ${process.env.PORT}` )
+    err ? console.log(err) : console.log(` server is running on ${process.env.PORT}`)
 )

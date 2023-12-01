@@ -12,8 +12,9 @@ export const userRegister = createAsyncThunk('user/register', async (user) => {
 
 export const userLogin = createAsyncThunk('user/login', async (user) => {
     try {
-        console.log('user', user);
-        const response = await axios.post('http://localhost:4000/api/users/login', user);
+        // console.log('user', user);
+        const response = await axios.post('http://localhost:4000/api/user/login', user);
+        // console.log(response.data);
         return response.data;
     } catch (error) {
         console.log(error);
@@ -31,6 +32,11 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        userLogin: (state, action) => {
+            state.user = action.payload?.user;
+            // state.user = action.payload;
+
+        },
         logout: (state) => {
             state.user = null;
         },
