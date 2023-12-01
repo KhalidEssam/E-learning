@@ -23,5 +23,9 @@ router.post('/Signup/', createUser);
 router.put('/:id', updateUser);
 // delete a User
 router.delete('/:id', deleteUser);
+//Login
+router.post('/login', (req, res) => {
+
+})
 
 module.exports = router;

@@ -1,13 +1,20 @@
-
-require('dotenv').config()
 //create express app
 const express = require('express');
 const app = express();
-// these are someedits
 const cors = require('cors');
+
+
+require('dotenv').config()
+
+
+// these are the Routes
 const CoursesRoutes = require('./routes/CoursesRouter');
 const UserRoutes = require('./routes/UserRouter');
-const mongoose = require('mongoose');
+
+const dbConnect = require('./config/dbConnect');
+
+dbConnect();
+
 
 //middlewares
 app.use(express.json());
@@ -26,14 +33,7 @@ app.use(cors());
 app.use('/api/courses', CoursesRoutes);
 app.use('/api/users', UserRoutes);
 
-//connect to db
-mongoose.connect(process.env.MONG_URI)
-    .then(() => {
-        console.log('connected to db');
-        app.listen(process.env.PORT, () => {
-            console.log(`server is running on port ${process.env.PORT}`)
-        })
-    })
-    .catch(err => {
-        console.log(err);
-    })
+
+app.listen(process.env.PORT, (err) =>
+err ? console.log(err) : console.log(` server is running on ${process.env.PORT}` )
+)
