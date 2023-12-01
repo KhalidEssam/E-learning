@@ -1,16 +1,32 @@
 import React, { useState } from 'react';
 import styles from './styles';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogin } from '../redux/user/userSlice';
+// import { Provider } from "react-redux";
+
 const SignInComponent = () => {
+    const dispatch = useDispatch();
+    // todo cheack the user state
+    const user = useSelector((state) => state.user?.user);
+
     const { loginWithRedirect } = useAuth0();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [User, setUser] = useState(
+        {
+            email: email,
+            password: password
+        }
+    );
 
     const handleEmailChange = (event) => {
+        setUser({ ...User, email: event.target.value });
         setEmail(event.target.value);
     };
 
     const handlePasswordChange = (event) => {
+        setUser({ ...User, password: event.target.value });
         setPassword(event.target.value);
     };
 
@@ -46,6 +62,8 @@ const SignInComponent = () => {
             <form style={styles.form} onSubmit={(e) => e.preventDefault()}>
 
                 <input
+                    required
+                    autoComplete='off'
                     type="email"
                     placeholder='Email'
                     value={email}
@@ -55,14 +73,18 @@ const SignInComponent = () => {
 
                 <input
                     required
+                    autoComplete='off'
                     type="password"
                     placeholder='Password'
                     value={password}
                     onChange={handlePasswordChange}
                     style={styles.inputStyle}
                 />
-
-                <button onClick={() => { handleSignIn(); loginWithRedirect(); }} type="submit" style={styles.buttonStyle}>Sign In</button>            </form>
+                {/* handleSignIn(); loginWithRedirect(); */}
+                <button onClick={() => {
+                    dispatch(userLogin(User)); console.log(User);
+                    user?.isAdmin === true ? loginWithRedirect({ returnTo: 'http://localhost:3000/courses' }) : console.log("Not Admin")
+                }} type="submit" style={styles.buttonStyle}>Sign In</button>            </form>
         </div>
     );
 };
