@@ -1,10 +1,26 @@
 const mongoose = require("mongoose");
 const UserSchema = require("../models/UserModel");
 
+const NodeCache = require("node-cache");
+const Cache = new NodeCache();
+const CACHE_KEY_USERS = "allUsers";
+
 //get all Users
 const getAllUsers = async (req, res) => {
     try {
+        //check if there are any users in the cache
+        const cachedUsers = Cache.get(CACHE_KEY_USERS);
+        if (cachedUsers) {
+            console.log('Users retrieved from Cache');
+            return res.status(200).json(cachedUsers);
+        }
+        // If data is not in the cache, simulate a delay of 10 seconds
+        await new Promise(resolve => setTimeout(resolve, 10000)); // Simulating 10-second delay
+
+        // If data is not on the cache
         const Users = await UserSchema.find();
+        Cache.set(CACHE_KEY_USERS, Users, 120);
+        console.log('Users retrieved from MongoDB');
         res.status(200).json(Users);
     } catch (error) {
         res.status(500).json({ message: error.message });
