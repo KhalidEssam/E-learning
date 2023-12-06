@@ -1,13 +1,18 @@
 const express = require('express');
+
+
 const {
     createUser,
     updateUser,
     deleteUser,
     getAllUsers,
     getUser,
-    getUserByEmail
+    getUserByEmail,
+    uploadImage
 } = require('../controllers/UserControllers');
 const bcrypt = require('bcrypt');
+
+
 
 const User = require('../models/UserModel');
 const { registerRules, loginRules, validation } = require("../middleware/validator");
@@ -22,6 +27,9 @@ router.get('/email/:email', getUserByEmail);
 
 // create a User
 router.post('/Signup/', createUser);
+
+// update user images
+router.post('/uploadImage', uploadImage);
 
 // update a User
 router.put('/:id', updateUser);

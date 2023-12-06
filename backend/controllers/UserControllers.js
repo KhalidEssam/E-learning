@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
 const UserSchema = require("../models/UserModel");
-
 const NodeCache = require("node-cache");
 const Cache = new NodeCache();
 const CACHE_KEY_USERS = "allUsers";
+const multer = require('multer');
+const path = require('path');
+
+
 
 //get all Users
 const getAllUsers = async (req, res) => {
@@ -15,15 +18,60 @@ const getAllUsers = async (req, res) => {
             return res.status(200).json(cachedUsers);
         }
         // If data is not in the cache, simulate a delay of 10 seconds
-        await new Promise(resolve => setTimeout(resolve, 10000)); // Simulating 10-second delay
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulating 10-second delay
 
         // If data is not on the cache
         const Users = await UserSchema.find();
-        Cache.set(CACHE_KEY_USERS, Users, 120);
+        Cache.set(CACHE_KEY_USERS, Users, 10);
         console.log('Users retrieved from MongoDB');
         res.status(200).json(Users);
     } catch (error) {
         res.status(500).json({ message: error.message });
+    }
+};
+
+
+// Multer storage configuration
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/'); // Directory to save uploaded files
+    },
+    filename: (req, file, cb) => {
+        const fileName = `${Date.now()}-${file.originalname}`;
+        cb(null, fileName);
+    },
+});
+
+
+
+const fileFilter = (req, file, cb) => {
+    if (
+        file.mimetype === 'image/jpeg' ||
+        file.mimetype === 'image/png' ||
+        file.mimetype === 'image/jpg'
+    ) {
+        cb(null, true);
+    } else {
+        cb(new Error('Invalid file type. Only JPEG and PNG are allowed.'), false);
+    }
+};
+
+const upload = multer({ storage: storage, fileFilter: fileFilter });
+
+// POST route to handle image upload
+const uploadImage = async (req, res) => {
+    try {
+        const { userEmail } = req.body;
+        console.log(req.body); // Assuming you have a userId to associate with the uploaded image
+        const imagePath = req.file.path; // File path where the image is saved
+
+        // const User = await UserSchema.findOne({ email: userId });
+        // Update the user's profileImage field with the file path
+        await User.findOneeAndUpdate({ email: userEmail }, { profileImage: imagePath }); // Assuming you have a userId (userId, { profileImage: imagePath });
+
+        res.status(200).send('Image uploaded and user updated successfully.');
+    } catch (error) {
+        res.status(500).send('Error uploading image: ' + error.message);
     }
 };
 
@@ -50,7 +98,7 @@ const getUserByEmail = async (req, res) => {
 //create a User
 const createUser = async (req, res) => {
     try {
-        console.log(req.body);
+        // console.log(req.body);
         const newUser = new UserSchema(req.body);
         await newUser.save();
         res.status(201).json(newUser);
@@ -100,4 +148,5 @@ module.exports = {
     getAllUsers,
     getUser,
     getUserByEmail,
+    uploadImage
 };

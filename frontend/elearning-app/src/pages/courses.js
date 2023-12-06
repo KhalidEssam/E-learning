@@ -8,7 +8,7 @@ function Courses() {
 
     useEffect(() => {
         const fetchCourses = async () => {
-            const response = await fetch('/api/courses');
+            const response = await fetch('/api/course');
             const json = await response.json();
             if (response.ok) {
                 setCourses(json);
@@ -21,7 +21,7 @@ function Courses() {
 
 
     return (
-        <div style={{overflow: 'hidden'}} >
+        <div style={{ overflow: 'hidden' }} >
             <h1 style={{ textDecoration: 'underline', }}>Courses</h1>
 
 

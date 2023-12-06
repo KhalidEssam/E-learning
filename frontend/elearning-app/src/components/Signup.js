@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styles from './styles';
+import axios from 'axios'; // For making HTTP requests
+
 const SignupForm = () => {
+
     const [formData, setFormData] = useState({
         username: '',
         password: '',
@@ -8,7 +11,7 @@ const SignupForm = () => {
         email: '',
         role: 'student'
     });
-
+    const [image, setImage] = useState(null);
     const [Username, setUsername] = useState('');
     const [Password, setPassword] = useState('');
     const [Email, setEmail] = useState('');
@@ -20,6 +23,52 @@ const SignupForm = () => {
             [name]: value
         });
 
+    };
+
+    const handleUpload = async () => {
+
+        console.log(image);
+        const response = await fetch('/api/user/email/' + Email, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+
+        });
+
+        const json = await response.json();
+        if (!response.ok) {
+            console.log("Eror", json);
+
+        }
+        console.log("user", json);
+
+
+
+        try {
+            console.log('Uploading image...');
+            const formData = new FormData();
+            formData.append('image', image);
+            formData.append('email', Email);
+            console.log(formData);
+            await axios.post('http://localhost:3000/api/user/uploadImage', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            // Handle success
+            console.log('Image uploaded successfully.');
+        } catch (error) {
+            // Handle error
+            console.error('Error uploading image:', error);
+        }
+    };
+
+
+
+    const handleImageChange = (event) => {
+        setImage(event.target.files[0]);
     };
 
     const handleSubmit = async (e) => {
@@ -35,8 +84,8 @@ const SignupForm = () => {
             role,
             email,
         }
-        console.log('user Data:', user);
-        const response = await fetch("/api/users/Signup", {
+
+        const response = await fetch("/api/user/Signup/", {
             method: "POST",
             body: JSON.stringify(user),
             headers: {
@@ -48,12 +97,15 @@ const SignupForm = () => {
             console.log("Eror", json);
         }
         if (response.ok) {
+            handleUpload();
             setUsername('');
             setPassword('');
             setEmail('');
             setRole('student');
             console.log("success", json);
         }
+
+
     };
 
 
@@ -63,6 +115,8 @@ const SignupForm = () => {
         <div style={styles.container}>
             <h2 style={{ textAlign: 'center' }}>Signup</h2>
             <form onSubmit={handleSubmit} style={styles.form}>
+                <input type="file"
+                    style={styles.inputStyle} onChange={handleImageChange} />
                 <input
                     type="text"
                     id="username"
@@ -118,6 +172,7 @@ const SignupForm = () => {
                 <button type="submit" style={styles.buttonStyle}>Sign Up</button>
             </form>
         </div>
+
     );
 };
 export default SignupForm;

@@ -20,6 +20,9 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    profileImage: {
+        type: String,
+        default: ''},
     isAdmin: { type: Boolean, default: false },
     isUser: { type: Boolean, default: true },
     // You can add more fields as per your requirements (e.g., email, name, etc.)

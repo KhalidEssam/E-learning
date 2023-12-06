@@ -33,8 +33,8 @@ const SignInComponent = () => {
     const handleSignIn = async () => {
 
         // const user = { email, password }
-        // Perform sign-in logic here (e.g., call an authentication API)
-        const response = await fetch('/api/users/email/' + email, {
+
+        const response = await fetch('/api/user/email/' + email, {
             method: "GET",
             // body: JSON.stringify(user),
             headers: {
