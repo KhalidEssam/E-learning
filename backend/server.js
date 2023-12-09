@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 app.use(cors());
 
 //routes
-app.use('/api/courses', CoursesRoutes);
+app.use('/api/course', CoursesRoutes);
 app.use('/api/user', UserRoutes);
 
 

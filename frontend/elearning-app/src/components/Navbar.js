@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 const Navbar = () => {
 
-    const items = { 'Home': '/', 'Contact': '/contact', 'About': '/about', 'Courses': '/courses', 'Logout': '/Logout' }; // Your list of items
+    const items = { 'Home': '/', 'Contact': '/Contactus', 'About': '/Aboutus', 'Courses': '/course', 'Logout': '/Logout' }; // Your list of items
     const [hoveredItem, setHoveredItem] = useState(0);
 
     const navStyle = {

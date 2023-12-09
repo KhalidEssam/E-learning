@@ -11,6 +11,8 @@ import { store } from "./redux/store";
 import Home from './pages/Home';
 import Courses from './pages/courses';
 import Users from './pages/users';
+import Aboutus from './pages/Aboutus';
+import Contactus from './pages/Contactus';
 
 // Components
 import Navbar from './components/Navbar';
@@ -30,10 +32,12 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Navbar />
-          <div className='ParentContainer'>
 
+          <div className='ParentContainer' >
             <Routes>
               <Route path='/' element={<Home />} />
+              <Route path='/Aboutus' element={<Aboutus />} />
+              <Route path='/Contactus' element={<Contactus />} />
               <Route path='/course' element={<Courses />} />
               <Route path='/user' element={<Users />} />
               <Route path='/Logout' element={<LogoutButton />} />

@@ -27,7 +27,8 @@ const styles = {
     },
     form: {
         textAlign: 'left',
-    }
+    },
+
 };
 
 export default styles;
