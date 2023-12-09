@@ -3,7 +3,6 @@ import React from 'react';
 import SignupForm from '../components/Signup';
 import SigninForm from '../components/Signin';
 import Slider from '../components/swiper';
-
 import slides from '../slides.json';
 
 
